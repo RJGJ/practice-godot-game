@@ -12,8 +12,6 @@ var velocity: Vector2 = Vector2.ZERO
 func _ready():
 	player = get_parent()
 	player_animations = $"../PlayerAnimations"
-	print(player_animations)
-	pass # Replace with function body.
 
 func _physics_process(_delta):
 	move()

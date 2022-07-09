@@ -12,7 +12,6 @@ func _ready():
 	player = get_parent()
 	last_position = player.position
 	current_position = player.position
-	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -33,4 +32,3 @@ func determine_flip_h():
 	# flip_h = current_position.x < last_position.x
 	last_position = current_position
 	# print(current_position, last_position)
-	pass

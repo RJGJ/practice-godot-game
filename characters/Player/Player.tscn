@@ -12,6 +12,9 @@
 [ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4.png" type="Texture" id=10]
 [ext_resource path="res://characters/Player/scripts/sprite_frames/running/knight_m_run_anim_f2.png" type="Texture" id=11]
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7.5, 10.5 )
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
@@ -25,14 +28,15 @@ animations = [ {
 "speed": 11.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8.5, 12 )
-
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 9, 41 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 2.5 )
+shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
@@ -45,16 +49,10 @@ script = ExtResource( 6 )
 [node name="PlayerAnimations" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "running"
-frame = 3
 playing = true
 script = ExtResource( 7 )
 
 [node name="Components" type="Node" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -0.5, 3 )
-shape = SubResource( 2 )
 
 [node name="Controller" type="Node" parent="."]
 script = ExtResource( 9 )

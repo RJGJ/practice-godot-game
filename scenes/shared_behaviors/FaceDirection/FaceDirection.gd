@@ -16,8 +16,6 @@ func _ready():
 	
 	last_position = character.position
 	current_position = character.position
-	
-	print(character, animated_sprite)
 
 func _process(_delta):
 	determine_flip()
