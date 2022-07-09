@@ -1,0 +1,66 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://characters/Player/scripts/sprite_frames/running/knight_m_run_anim_f1.png" type="Texture" id=1]
+[ext_resource path="res://characters/Player/scripts/sprite_frames/running/knight_m_run_anim_f0.png" type="Texture" id=2]
+[ext_resource path="res://characters/Player/scripts/sprite_frames/running/knight_m_run_anim_f3.png" type="Texture" id=3]
+[ext_resource path="res://assets/frames/knight_m_idle_anim_f1.png" type="Texture" id=4]
+[ext_resource path="res://assets/frames/knight_m_idle_anim_f0.png" type="Texture" id=5]
+[ext_resource path="res://characters/Player/scripts/PlayerSprite.gd" type="Script" id=6]
+[ext_resource path="res://characters/Player/scripts/PlayerAnimations.gd" type="Script" id=7]
+[ext_resource path="res://scenes/shared_behaviors/FaceDirection/FaceDirection.tscn" type="PackedScene" id=8]
+[ext_resource path="res://characters/Player/scripts/Controller.gd" type="Script" id=9]
+[ext_resource path="res://assets/0x72_DungeonTilesetII_v1.4.png" type="Texture" id=10]
+[ext_resource path="res://characters/Player/scripts/sprite_frames/running/knight_m_run_anim_f2.png" type="Texture" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 11 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "running",
+"speed": 11.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8.5, 12 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( 9, 41 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 10 )
+hframes = 9
+region_enabled = true
+region_rect = Rect2( 128, 106, 143, 22 )
+script = ExtResource( 6 )
+
+[node name="PlayerAnimations" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "running"
+frame = 3
+playing = true
+script = ExtResource( 7 )
+
+[node name="Components" type="Node" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -0.5, 3 )
+shape = SubResource( 2 )
+
+[node name="Controller" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="Behaviors" type="Node" parent="."]
+
+[node name="FaceDirection" parent="Behaviors" instance=ExtResource( 8 )]
+character_path = NodePath("../..")
+animated_sprite_path = NodePath("../../PlayerAnimations")
